@@ -526,7 +526,7 @@ def _get_config_or_cache_dir(xdg_base_getter):
         configdir = Path(xdg_base_getter(), "matplotlib")
     else:
         configdir = Path.home() / ".matplotlib"
-    # Resolve the path to handle potential symlinks, which are not directories.
+    # Resolve the path to handle potential issues with inaccessible symlinks.
     configdir = configdir.resolve()
     try:
         configdir.mkdir(parents=True, exist_ok=True)
