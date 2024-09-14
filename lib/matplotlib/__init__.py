@@ -530,8 +530,8 @@ def _get_config_or_cache_dir(xdg_base_getter):
     configdir = configdir.resolve()
     try:
         configdir.mkdir(parents=True, exist_ok=True)
-    except OSError:
-        pass
+    except OSError as exc:
+        _log.warning("mkdir check failed for path %s: %s", configdir, exc)
     else:
         if os.access(str(configdir), os.W_OK) and configdir.is_dir():
             return str(configdir)
